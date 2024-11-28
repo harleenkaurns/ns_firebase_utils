@@ -34,10 +34,10 @@ class AppAnalytics implements FirebaseAnalytics {
   Future<void> log({
     required String eventName,
     String? category,
-    Map<String, dynamic>? parameters,
+    Map<String, Object>? parameters,
   }) async {
     if (parameters == null) {
-      parameters = <String, dynamic>{};
+      parameters = <String, Object>{};
     }
     if (category == null) {
       category = '';
@@ -62,7 +62,7 @@ class AppAnalytics implements FirebaseAnalytics {
   Future<void> logEvent({
     String? name,
     String? category,
-    Map<String, dynamic>? parameters,
+    Map<String, Object>? parameters,
     AnalyticsCallOptions? callOptions,
   }) async {
     name = name?.replaceAll(new RegExp(r' '), '_'); // name cannot use '-'
@@ -73,7 +73,7 @@ class AppAnalytics implements FirebaseAnalytics {
 
     // TODO: needs to get this from the config or app version or A/B testing version
     if (parameters == null) {
-      parameters = <String, dynamic>{};
+      parameters = <String, Object>{};
     }
 
     String buildStr = NSFirebase.instance.buildNumber;
@@ -108,7 +108,7 @@ class AppAnalytics implements FirebaseAnalytics {
   Future<void> logJoinGroup({
     required String groupId,
     AnalyticsCallOptions? callOptions,
-    Map<String, Object?>? parameters,
+    Map<String, Object>? parameters,
   }) async {
     await _firebaseAnalytics.logJoinGroup(
       groupId: groupId,
@@ -120,23 +120,23 @@ class AppAnalytics implements FirebaseAnalytics {
   Future<void> logLogin({
     String? loginMethod,
     AnalyticsCallOptions? callOptions,
-    Map<String, Object?>? parameters,
+    Map<String, Object>? parameters,
   }) async {
     await _firebaseAnalytics.logLogin(loginMethod: loginMethod);
   }
 
   @override
-  Future<void> logSignUp({required String signUpMethod, Map<String, Object?>? parameters}) async {
+  Future<void> logSignUp({required String signUpMethod, Map<String, Object>? parameters}) async {
     await _firebaseAnalytics.logSignUp(signUpMethod: signUpMethod);
   }
 
   @override
-  Future<void> logTutorialBegin({Map<String, Object?>? parameters}) async {
+  Future<void> logTutorialBegin({Map<String, Object>? parameters}) async {
     await _firebaseAnalytics.logTutorialBegin();
   }
 
   @override
-  Future<void> logTutorialComplete({Map<String, Object?>? parameters}) async {
+  Future<void> logTutorialComplete({Map<String, Object>? parameters}) async {
     await _firebaseAnalytics.logTutorialComplete();
   }
 
