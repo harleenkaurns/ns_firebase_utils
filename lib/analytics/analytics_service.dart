@@ -46,7 +46,7 @@ class AppAnalytics implements FirebaseAnalytics {
   }
 
   @override
-  Future<void> logAppOpen({AnalyticsCallOptions? callOptions, Map<String, Object?>? parameters}) {
+  Future<void> logAppOpen({AnalyticsCallOptions? callOptions, Map<String, Object>? parameters}) {
     if (!NSFirebase.instance.isInitialized)
       throw CustomException(
         code: 'not_initialized',
@@ -86,7 +86,7 @@ class AppAnalytics implements FirebaseAnalytics {
       parameters.putIfAbsent(ConstKeys.email, () => _userInfo[ConstKeys.email]);
     }
 
-    Map<String, dynamic> newParameters = Map<String, dynamic>();
+    Map<String, Object>? newParameters = Map<String, Object>();
     // Remove null
     parameters.forEach((key, dynamic value) {
       if (value != null) {
